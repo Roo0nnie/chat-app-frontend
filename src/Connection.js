@@ -1,6 +1,5 @@
-function Connection(port='8000'){
+function Connection(port='8080'){
 
     return 'http://localhost:'+ port;
 }
-
 export default Connection;

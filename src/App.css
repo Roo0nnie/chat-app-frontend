@@ -1,26 +1,65 @@
-.App {
-  text-align: left;
+/*navigation style*/
+:root {
+  --black:black;}
+body {
+  position: relative;
 }
-.header {
-  font-size: 1em;
-  font-weight: 700;
+.Header {
+  width: 100%;
+  position: fixed;
+  min-height: 5rem;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px 0 rgba(110, 100, 100, 0.2), 0 6px 20px 0 rgba(100, 95, 95, 0.19);
+  z-index: 2;
+  background: white;
 }
-ul li {
-  list-style: none;
+.nav-link {
+  margin-top: 1em;
+  font-size: 20px;
+  font-weight: 650;
 }
-.header h6 {
+.nav-link li {
   list-style: none;
   display: inline-block;
+  margin-inline: 1em;
+}
+.nav-link li a,.logo a {
+  text-decoration: none;
+}
+.btn-login {
+  font-size: 20px;
+  font-weight: 650;
+  padding-inline: 1em;
+} 
+
+.background {
+  position: relative;
+  height: 100vh;
+  background-image: url(./background2.png);
+  background-size: cover;
+  background-position: center;
 }
 
-.Tic-box {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  border: 2px solid black;
-  text-align: center;
-  line-height: normal;
-  vertical-align: bottom;
-  font-size: 20px;
+/*section content*/
+.left {
+  margin-top: 5em;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.right {
+  margin-top: 5em;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+/*left part image*/
+.right img {
+  height: 500px;
 }

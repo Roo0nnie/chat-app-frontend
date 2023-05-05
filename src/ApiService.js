@@ -5,6 +5,7 @@ function ApiService(path, formData, responseCallback, method="GET"){
     const connection = Connection();
 
     if(method === 'GET'){
+        console.log(path);
         fetch(connection + path)
         .then(response => response.json())
         .then(data => {
@@ -27,8 +28,6 @@ function ApiService(path, formData, responseCallback, method="GET"){
             console.log(error.message);
         });
     }
-    
-
 }
 
 export default ApiService;
