@@ -1,9 +1,56 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import imgPhone from './pictureConvo.svg';
-import Registration from './Registration';
+import ApiService from './ApiService';
+import SignUp from './SignUp';
+import Login from './Login';
 
 const Home = () => {
+
+    const [list, setList] = useState([]);
+    const [count, setcount] = useState(0);
+
+    const getUserList = () =>{
+        ApiService('/usercds', null, (data)=>{
+            setList(data);
+        });
+
+        ApiService('/users/count/all', null, (data)=>{
+            setcount(data.count);
+        });
+    }
+
+    useEffect(()=>{
+        getUserList();
+    },[]);
+
+    const [UserDetails, setUserDetails] = useState({});
+
+    const onCreateAccount = () =>{
+        setUserDetails({id:0});
+    }
+
+    const onUserSaveHandler = (formData) =>{
+        ApiService('/users/' + formData.id, formData, (data)=>{
+            getUserList();
+        }, formData.id === 0 ? "POST" : "PUT");
+    }
+
+   
+
+    const onEditHandler = (data) =>{
+        ApiService('/users/' + data.id, null, (data)=>{
+            setUserDetails(data);
+        });
+    }
+
+
+
+    const onStudentSaveHandler = (formData) =>{
+        ApiService('/students/' + formData.id, formData, (data)=>{
+            getUserList();
+        }, formData.id === 0 ? "POST" : "PUT");
+    }
     return (
         <>
                 <section className="background">
@@ -23,8 +70,7 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="click">
-                                        <button type="button" className="btn bg-primary fw-bold text-white mt-4 mx-4" data-bs-toggle="modal" data-bs-target="#signup">Sign up now!!</button>
-                                                          
+                                        <button type="button" className="btn btn-primary fw-bold text-white mt-4 mx-4" onClick={onCreateAccount} data-bs-toggle="modal" data-bs-target="#signup">Sign up now!!</button>               
                                     </div>
                                 </div>
                             </div>
@@ -41,54 +87,16 @@ const Home = () => {
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header">
+                            <h4>Sign up ({count})</h4>
                             <button type="button" className="btn-close btn-sm" data-bs-dismiss="modal"></button>
                         </div>
+
                         <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-                                    <h3 className='fw-bold'>Sign Up</h3>
-                                </div>
-                            </div>
-                            <form>
-                            <div className="form-floating mb-3 mt-3">
-                                    <input type="text"  class="form-control" id="floatingInput" placeholder='Firstname'/>
-                                    <label for="floatingInput">Firstname</label>
-                               </div>
-                               <div className="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder='Lastname'/>
-                                    <label for="floatingInput">Lastname</label>
-                               </div>
-                               <div className="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder='Username'/>
-                                    <label for="floatingInput">Username</label>
-                               </div>
-                               <div className="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingInput" placeholder='Password'/>
-                                    <label for="floatingInput">Password</label>
-                               </div>
-                               <div className="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingInput" placeholder='Confirm Password'/>
-                                    <label for="floatingInput">Confirm Password</label>
-                               </div>
-                               <div class="checkMark">
-                                    <input class="form-check-input check" type="checkbox"/>
-                                    <label class="form-check-label check fw-bold mx-2" for="remember-me">
-                                        Agree to the <span><a href="#" style={{textDecoration:"none"}}>term</a></span> and <span><a href="#"  style={{textDecoration:"none"}}> condition</a></span>
-                                    </label>
-                                </div>
-                                    <div class="row mt-3">
-                                        <div className="col-sm-12">
-                                            <button className="btn bg-primary text-white fw-bold mt-3" style={{width:"100%"}} onClick={<Registration />}>Create Account</button>
-                                        </div>
-                                    </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <label for="forgot-Pass" class="fw-bold">Don't have a account?<span><a href="#"  style={{textDecoration:"none"}}> Sign up</a></span></label> 
+                            <SignUp data={UserDetails} onSaveHandler={onUserSaveHandler} />
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
 
                 <div id="login" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -97,32 +105,7 @@ const Home = () => {
                             <button type="button" className="btn-close btn-sm" data-bs-dismiss="modal"></button>
                         </div>
                         <div className="modal-body">
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-                                    <h3 className='fw-bold'>Log In</h3>
-                                </div>
-                            </div>
-                            <form>
-                            <div className="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder='Username'/>
-                                    <label for="floatingInput">Username</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingInput" placeholder='Password'/>
-                                    <label for="floatingInput">Password</label>
-                            </div>
-                            <div class="checkMark">
-                                    <input class="form-check-input check" type="checkbox"/>
-                                    <label class="form-check-label check fw-bold mx-2" for="remember-me">
-                                        Remember Me
-                                    </label>
-                                </div>
-                                    <div class="row mt-3">
-                                        <div className="col-sm-12">
-                                            <button className="btn bg-primary text-white fw-bold mt-3" data-bs-dismiss="modal" style={{width:"100%"}}>Login</button>
-                                        </div>
-                                    </div>
-                            </form>
+                            <Login />
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
                             <label for="forgot-Pass" class="fw-bold"><span><a href="#"  style={{textDecoration:"none"}}> Forgot </a></span> your password?</label> 
@@ -133,4 +116,5 @@ const Home = () => {
         </>
     )
 }
+
 export default Home;
