@@ -93,21 +93,21 @@ const Home = () => {
                 </div>
             </div>
 
-                <div id="login" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="btn-close btn-sm" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div className="modal-body">
-                            <Login />
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <label for="forgot-Pass" class="fw-bold"><span><a href="#"  style={{textDecoration:"none"}}> Forgot </a></span> your password?</label> 
-                        </div>
+            <div id="login" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <button type="button" className="btn-close btn-sm" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div className="modal-body">
+                        <Login />
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <label for="forgot-Pass" class="fw-bold"><span><a href="#"  style={{textDecoration:"none"}}> Forgot </a></span> your password?</label> 
                     </div>
                 </div>
-                </div>    
+            </div>
+            </div>    
         </>
     )
 }

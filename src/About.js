@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import imgPhone1 from './features-side-image.png'
 import imgPhone2 from './feature-side-image3.png'
 import imgPhone3 from './pictureConvo.svg'
+import imgPhone4 from './Ronie.jpg'
+import './App.css'
 
 function About() {
     return(
@@ -47,6 +49,24 @@ function About() {
                             </div>
                         </div>
                     </div>
+            </section>
+            <section className='deveper-background'>
+                <div className='container'>
+                    <div className='developer-format'>
+                        <div className="title">
+                            <h1>Developer || <span className='text-dark'>Owner</span></h1>
+                        </div>
+                        <div className='developer-image'>
+                            <div className='image'>
+                                <img src={imgPhone4} class="rounded-circle img-fluid shadow-1" alt="User1" />
+                            </div>
+                            <div className='image'>
+                                <img src={imgPhone4} class="rounded-circle img-fluid shadow-1" alt="User1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </>
     )
