@@ -1,37 +1,39 @@
 import { useState } from "react";
-import ApiService from "./ApiService";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
+  
+    const navigation = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [accountVerfify, setaccountVerify] = useState(false);
-    const [userpassword, setuserPassword] = useState(false);
-    const [userusername, setuserUsername] = useState(false);
+    const verifyAccount = () => {
+        fetch('http://localhost:8080/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            const jsonString = JSON.stringify(data);
+            if(jsonString.includes("Invalid")) {
+                alert('Invalid Account');
+            } else {
+                navigation('/Chat');
+                
+            }
+            
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      };
 
-    const onVerifyusername = (e) => {
-        const username = e.target.value;
-        ApiService('/students/login/' + username, null, (data)=>{
-            setuserPassword(data);
-        });
-      }
-      const onVerifypassword = (e) => {
-        const password = e.target.value;
-        ApiService('/students/login/' + password, null, (data)=>{
-            setuserUsername(data);
-        });
-      }
-    
-    const onClickVerifyAccount = () => {
-        if(setuserPassword(false) && (setuserUsername(false))) {
-            setaccountVerify(false);
-        } else {
-            setaccountVerify(true);
-        }
-        
-    }
       
-    
-      
 
+      
     return(
         <>
             <div className="">
@@ -42,11 +44,11 @@ function Login() {
                 </div>
                 <form>
                 <div className="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder='Username' onChange={onVerifyusername} name='username'/>
+                        <input type="text" class="form-control" placeholder='Username' onChange={e => setUsername(e.target.value)} name='username' value={username}/>
                         <label for="floatingInput">Username</label>
                 </div>
                 <div className="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingInput" placeholder='Password' onChange={onVerifypassword} name='password'/>
+                        <input type="password" class="form-control" placeholder='Password' onChange={e => setPassword(e.target.value)} name='password' value={password}/>
                         <label for="floatingInput">Password</label>
                 </div>
 
@@ -60,7 +62,7 @@ function Login() {
                     </div>
                         <div class="row mt-3">
                             <div className="col-sm-12">
-                                <button className="btn bg-primary text-white fw-bold mt-3" data-bs-dismiss="modal" style={{width:"100%"}} onClick={onClickVerifyAccount}>Login</button>
+                                <button className="btn bg-primary text-white fw-bold mt-3" data-bs-dismiss="modal" style={{width:"100%"}} onClick={verifyAccount}>Login</button>
                             </div>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">

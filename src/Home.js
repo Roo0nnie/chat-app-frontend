@@ -58,16 +58,11 @@ const Home = () => {
                         <div className="row">
                             <div className="col-md-6 col-lg-6 col-xl-6 mb-12 mb-md-0">
                                 <div className="left">
-                                    <h1 className="fw-bold fs-1 text-primary">Connect With Us!</h1>
-                                    <h2 className="fw-bold fs-3">Any Time,</h2>
-                                    <h2 className="fw-bold fs-3">Anywhere</h2>
+                                    <h1 className="fw-bold text-primary" style={{fontSize:"3.5em"}}>Connect With Us!</h1>
+                                    <h2 className="fw-bold fs-1">Any Time,</h2>
+                                    <h2 className="fw-bold fs-1">Anywhere</h2>
                                     <div className="card mt-4" style={{width:"18rem"}}>
-                                        <div className="card-body">
-                                            <h5 className="card-title fw-bold">RJchat</h5>
-                                            <p className="card-text">
-                                                Access a fast, convenient and collaborated communication with each other.
-                                            </p>
-                                        </div>
+                                        
                                     </div>
                                     <div className="click">
                                         <button type="button" className="btn btn-primary fw-bold text-white mt-4 mx-4" onClick={onCreateAccount} data-bs-toggle="modal" data-bs-target="#signup">Sign up now!!</button>               
@@ -98,21 +93,21 @@ const Home = () => {
                 </div>
             </div>
 
-                <div id="login" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="btn-close btn-sm" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div className="modal-body">
-                            <Login />
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <label for="forgot-Pass" class="fw-bold"><span><a href="#"  style={{textDecoration:"none"}}> Forgot </a></span> your password?</label> 
-                        </div>
+            <div id="login" className="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <button type="button" className="btn-close btn-sm" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div className="modal-body">
+                        <Login />
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <label for="forgot-Pass" class="fw-bold"><span><a href="#"  style={{textDecoration:"none"}}> Forgot </a></span> your password?</label> 
                     </div>
                 </div>
-                </div>    
+            </div>
+            </div>    
         </>
     )
 }

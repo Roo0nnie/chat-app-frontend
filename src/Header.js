@@ -6,22 +6,21 @@ const menus = [{label:"Home", path:'/'},
                 {label:"About", path:'/About'},
                 {label:"Contact", path:'/Contact'}]
 
-function Header({menuList}){
+function Header({menuList}) {
     return (
         <>
             <div className="Header">
                 <div className='container'>
                     <div className='navigation-top d-flex justify-content-between'>
                         <div className="logo mt-3">
-                            <a href="#"><span className="fw-bold text-dark fs-2">RJ</span><span className="fs-4 fw-bold text-dark">chat</span></a>
+                            <span className="fw-bold text-dark fs-2">RJ</span><span className="fs-4 fw-bold text-dark">chat </span>
                         </div>
                         <nav>
                             <ul className="nav-link">
                                 {menus.map((item)=><li>
                                     <Link to={item.path}>{item.label}</Link>
                                 </li>)}
-                                <li><button type='button' className='btn bg-primary btn-login text-white' data-bs-toggle="modal" data-bs-target="#login">Login</button></li>
-
+                                <li><button type='button' className='btn bg-primary btn-login text-white' data-bs-toggle="modal" data-bs-target="#login" id='loginAccount'>Login</button></li>
                             </ul>
                         </nav>
                     </div>

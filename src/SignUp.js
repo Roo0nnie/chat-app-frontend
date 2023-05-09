@@ -1,47 +1,58 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function SignUp({data, onSaveHandler}){
+function SignUp() {
 
-    useEffect(()=>{
-        setuserData(data);
-    },[data]);
+const [firstname, setFirstname] = useState('');
+const [lastname, setLastname] = useState('');
+const [username, setUsername] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
 
-    const [userData, setuserData] = useState(data);
-
-    const onChangeHandler = (e) =>{
-        let fieldName = e.target.name;
-        let newData = {...userData, [fieldName]: e.target.value};
-        setuserData(newData);
-    }
-
-    const onClickSaveHandler = () => {
-        onSaveHandler(userData);
-    }
+const onClickRegister = () => {
+    fetch('http://localhost:8080/users/registration', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        lastname,
+        firstname,
+        email,
+        username,
+        password,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log( 'error');
+      });
+  };
 
     return (
     <>
-        <div className="">
-                    <input type="hidden" name="id" value={userData.id}/>
+        <div>
                    
                         <div className="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" value={userData.firstname} id="floatingInput" placeholder='Firstname' name='firstname' onChange={onChangeHandler}/>
+                            <input type="text" class="form-control" placeholder='Firstname' onChange={e => setFirstname(e.target.value)} name='firstname' value={firstname}/>
                             <label for="floatingInput">Firstname</label>
-                        </div>
-                   
+                        </div>            
                         <div className="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" value={userData.lastname} id="floatingInput" placeholder='Lastname' name='lastname' onChange={onChangeHandler}/>
+                            <input type="text" class="form-control" placeholder='Lastname' onChange={e => setLastname(e.target.value)} name='lastname' value={lastname}/>
                             <label for="floatingInput">Lastname</label>
                         </div>
                         <div className="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" value={userData.username} id="floatingInput" placeholder='Username' name='username' onChange={onChangeHandler}/>
+                            <input type="text" class="form-control" placeholder='Username' onChange={e => setUsername(e.target.value)} name='username' value={username}/>
                             <label for="floatingInput">Username</label>
                         </div>                    
                         <div className="form-floating mb-3 mt-3">
-                            <input type="email" class="form-control" value={userData.email} id="floatingInput" placeholder='Email' name='email' onChange={onChangeHandler}/>
+                            <input type="email" class="form-control" placeholder='Email' onChange={e => setEmail(e.target.value)} name='email' value={email}/>
                             <label for="floatingInput">Email</label>
                         </div>                
                         <div className="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" value={userData.password} id="floatingInput" name='password' placeholder='Password' onChange={onChangeHandler}/>
+                            <input type="password" class="form-control" placeholder='Password' onChange={e => setPassword(e.target.value)} name='password' value={password}/>
                             <label for="floatingInput">Password</label>
                         </div>
                
@@ -54,7 +65,7 @@ function SignUp({data, onSaveHandler}){
                     </div>
                     <div class="row mt-3">
                         <div className="col-sm-12">
-                            <button className="btn bg-primary text-white fw-bold mt-3" data-bs-dismiss="modal" onClick={onClickSaveHandler} style={{width:"100%"}}>Create Account</button>
+                            <button className="btn bg-primary text-white fw-bold mt-3" data-bs-dismiss="modal" onClick={onClickRegister} style={{width:"100%"}}>Create Account</button>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
