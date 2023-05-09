@@ -7,6 +7,7 @@ import Layout from './Layout';
 import About from './About';
 import Features from './Features';
 import Contact from './Contact';
+import Chat from './Chat';
 import Error404 from './Error404';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="About" element={<About />}/>
           <Route path="Features" element={<Features />}/>
           <Route path="Contact" element={<Contact />}/>
+          <Route path="Chat" element={<Chat />}/>
           <Route path="*" element={<Error404 />}/>
         </Route>
       </Routes>
