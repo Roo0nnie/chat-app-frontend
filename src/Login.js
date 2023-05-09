@@ -31,17 +31,14 @@ function Login() {
           });
       };
 
-      
-
-      
     return(
         <>
-            <div className="">
+            <div className="container">
             <div className="row">
                     <div className="col-md-12 text-center">
                         <h3 className='fw-bold'>Log In</h3>
                     </div>
-                </div>
+            </div>
                 <form>
                 <div className="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" placeholder='Username' onChange={e => setUsername(e.target.value)} name='username' value={username}/>

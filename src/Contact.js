@@ -1,7 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+
 function Contact() {
+
+
     return(
         <>
-            <h1>Contact</h1>
+           
         </>
     )
 }
